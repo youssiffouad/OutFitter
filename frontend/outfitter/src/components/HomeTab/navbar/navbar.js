@@ -33,19 +33,19 @@ const Navbar = () => {
               </li>
               <li
                 className={`${styles.item} ${
-                  activeItem === "about" ? styles.active : ""
+                  activeItem === "generator" ? styles.active : ""
                 }`}
-                onClick={() => handleItemClick("about")}
+                onClick={() => handleItemClick("generator")}
               >
                 <Link to="/about">About</Link>
               </li>
               <li
                 className={`${styles.item} ${
-                  activeItem === "services" ? styles.active : ""
+                  activeItem === "myclothes" ? styles.active : ""
                 }`}
-                onClick={() => handleItemClick("services")}
+                onClick={() => handleItemClick("myclothes")}
               >
-                <Link to="/services">Services</Link>
+                <Link to="/myclothes">My Clothes</Link>
               </li>
               <li
                 className={`${styles.item} ${
@@ -53,7 +53,7 @@ const Navbar = () => {
                 }`}
                 onClick={() => handleItemClick("contact")}
               >
-                <Link to="/contact">Contact</Link>
+                <Link to="/generator">Generator</Link>
               </li>
             </ul>
           </div>

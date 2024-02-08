@@ -1,7 +1,11 @@
 import "./App.css";
+
+import AboutWhole from "./components/About/WHoleABOUT";
 import HomeTab from "./components/HomeTab";
 import Navbar from "./components/HomeTab/navbar/navbar";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import InputNewPieceForm from "./components/Services/InputNewPiece";
+import OutfitGeneratorForm from "./components/Generator/outfitGeneratorForm";
 
 function App() {
   const router = createBrowserRouter([
@@ -10,9 +14,9 @@ function App() {
       element: <Navbar />,
       children: [
         { path: "/home", element: <HomeTab /> },
-        { path: "/about", element: <h1>about</h1> },
-        { path: "/contact", element: <h1>contact</h1> },
-        { path: "/services", element: <h1>services</h1> },
+        { path: "/about", element: <AboutWhole /> },
+        { path: "/myclothes", element: <InputNewPieceForm /> },
+        { path: "/generator", element: <OutfitGeneratorForm /> },
       ],
     },
   ]);

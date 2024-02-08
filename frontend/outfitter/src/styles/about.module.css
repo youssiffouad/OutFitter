@@ -1,0 +1,27 @@
+/* About.module.css */
+
+.imgContainer {
+  position: relative;
+  overflow: hidden;
+}
+.imgContainer:hover .textOverlay {
+  transform: translateY(-100%);
+}
+
+.textOverlay {
+  background: linear-gradient(1deg, black 0%, transparent 117%);
+  position: absolute;
+  bottom: -100%;
+  z-index: 1;
+  color: white;
+  transition: transform 0.3s ease;
+  width: 100vw;
+
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
