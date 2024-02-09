@@ -1,0 +1,30 @@
+{
+  "name": "outfitter",
+  "version": "1.0.0",
+  "description": "backend of Outfitter App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/youssiffouad/OutFitter.git"
+  },
+  "keywords": [
+    "outfitter",
+    "clothing",
+    "outfit_gnerator",
+    "express.js"
+  ],
+  "author": "Youssif_Mohamed",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/youssiffouad/OutFitter/issues"
+  },
+  "homepage": "https://github.com/youssiffouad/OutFitter#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "sequelize": "^6.36.0",
+    "sqlite3": "^5.1.7"
+  }
+}
