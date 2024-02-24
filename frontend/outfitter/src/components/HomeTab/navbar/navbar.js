@@ -33,27 +33,28 @@ const Navbar = () => {
               </li>
               <li
                 className={`${styles.item} ${
-                  activeItem === "generator" ? styles.active : ""
+                  activeItem === "about" ? styles.active : ""
                 }`}
-                onClick={() => handleItemClick("generator")}
+                onClick={() => handleItemClick("about")}
               >
+                {" "}
                 <Link to="/about">About</Link>
               </li>
               <li
                 className={`${styles.item} ${
-                  activeItem === "myclothes" ? styles.active : ""
+                  activeItem === "generator" ? styles.active : ""
                 }`}
-                onClick={() => handleItemClick("myclothes")}
+                onClick={() => handleItemClick("generator")}
               >
-                <Link to="/myclothes">My Clothes</Link>
+                <Link to="/generator">Generator</Link>
               </li>
               <li
                 className={`${styles.item} ${
-                  activeItem === "contact" ? styles.active : ""
+                  activeItem === "Myprofile" ? styles.active : ""
                 }`}
-                onClick={() => handleItemClick("contact")}
+                onClick={() => handleItemClick("Myprofile")}
               >
-                <Link to="/generator">Generator</Link>
+                <Link to="/Myprofile">My profile</Link>
               </li>
             </ul>
           </div>

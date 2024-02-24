@@ -1,15 +1,18 @@
+import ProtectedRoute from "../../helpers/HOCProtectionRoute";
 import AboutHeader from "./AboutHeader";
 import AboutPersonCard from "./personcard";
 
 const AboutWhole = () => {
   return (
-    <div>
-      <AboutHeader />
-      <div className="d-flex flex-lg-row">
-        <AboutPersonCard />
-        <AboutPersonCard />
+    <ProtectedRoute>
+      <div>
+        <AboutHeader />
+        <div className="d-flex flex-lg-row">
+          <AboutPersonCard />
+          <AboutPersonCard />
+        </div>
       </div>
-    </div>
+    </ProtectedRoute>
   );
 };
 export default AboutWhole;

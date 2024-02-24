@@ -11,7 +11,7 @@
 .formStyle h4::after {
   position: absolute;
   content: "";
-  top: 13%;
+  top: 17%;
   left: 0;
   width: 100%;
   height: 2px;

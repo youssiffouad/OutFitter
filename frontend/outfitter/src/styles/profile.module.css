@@ -1,0 +1,7 @@
+.InputLabel {
+  background-color: brown;
+  color: black;
+  cursor: pointer;
+  border-radius: 20px;
+  padding: 5px;
+}
