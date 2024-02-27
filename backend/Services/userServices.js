@@ -1,4 +1,8 @@
 const User = require("../models/User");
+const Clothes = require("../models/Clothes");
+const WeatherCondition = require("../models/weatherCondition");
+const CLothesCategory = require("../models/ClothesCategory");
+const Material = require("../models/Material");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const secretKey = "outfitter";
@@ -88,6 +92,48 @@ const getProfilePhoto = async (id) => {
     throw err;
   }
 };
+
+//fn to get All clothes of certian user
+const getAllClothes = async (id) => {
+  try {
+    const clothes = await Clothes.findAll({
+      where: { user_id: id },
+      include: [
+        { model: WeatherCondition },
+        { model: Material },
+        { model: CLothesCategory },
+      ],
+    });
+    console.log("here are the clothes of the user that i got", clothes);
+  } catch (err) {
+    console.log("failed to get clothes of user", err);
+    throw err;
+  }
+};
+
+//fn to add new piece of clothes for certain user
+const addNewPiece = async (
+  userid,
+  weatherCondition,
+  material,
+  description,
+  clothesCategory,
+  photoURL
+) => {
+  try {
+    await Clothes.create({
+      user_id: userid,
+      weatherCondition_id: weatherCondition,
+      material_id: material,
+      description: description,
+      clothesCategory_id: clothesCategory,
+      photo: photoURL,
+    });
+  } catch (err) {
+    console.log("failed to add new clothes piece for certain user", err);
+    throw err;
+  }
+};
 //getProfilePhoto(9);
 
 module.exports = {
@@ -97,4 +143,6 @@ module.exports = {
   viewAllUsers,
   uploadPhoto,
   getProfilePhoto,
+  getAllClothes,
+  addNewPiece,
 };

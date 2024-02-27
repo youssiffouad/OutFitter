@@ -8,7 +8,6 @@ import {
   Navigate,
   RouterProvider,
 } from "react-router-dom";
-import InputNewPieceForm from "./components/Profile/InputNewPiece";
 import OutfitGeneratorForm from "./components/Generator/outfitGeneratorForm";
 
 import { AuthProvider } from "./ContextStore/authenticationStore";

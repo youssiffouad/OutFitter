@@ -1,0 +1,30 @@
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.Card {
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: darkgrey;
+  flex-direction: column;
+  margin: 5%;
+  padding: 3%;
+}
+.ImgContainer {
+  height: 70%;
+  width: 90%;
+  position: relative;
+}
+.favIcon {
+  position: absolute;
+  top: 10%;
+  right: 10%;
+}
+
+.ImgAtts {
+  display: flex;
+  flex-direction: column;
+}

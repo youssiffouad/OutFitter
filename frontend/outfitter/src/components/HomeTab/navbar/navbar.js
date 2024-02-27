@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "../../../styles/navbar.module.css"; // Import the CSS module
 import { Link, Outlet } from "react-router-dom";
+import logo from "../../../images/outfitLogo.png";
 
 const Navbar = () => {
   const [activeItem, setActiveItem] = useState(null);
@@ -21,7 +22,26 @@ const Navbar = () => {
             Toggle
           </button>
           <div id={styles.navbarNav}>
-            <h2>My Logo</h2>
+            <div
+              style={{
+                width: "90px",
+                height: "60px",
+                overflow: "hidden",
+                position: "relative",
+              }}
+            >
+              <img
+                src={logo}
+                alt="logo"
+                style={{
+                  position: "absolute",
+                  left: "50%",
+                  top: "58%",
+                  transform: "translate(-50%, -50%)",
+                  maxHeight: "122%",
+                }}
+              />
+            </div>
             <ul className={styles.nav}>
               <li
                 className={`${styles.item} ${

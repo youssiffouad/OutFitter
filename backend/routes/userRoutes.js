@@ -9,7 +9,8 @@ router.post("/signup", userController.signUp);
 router.get("/changepassword", userController.changePassword);
 router.get("/view", userController.viewAllUsers);
 router.post(
-  "/:userId/uploadprofilephoto",
+  "/uploadprofilephoto",
+  TVMW.verifyToken,
   photoUpload.storageHandler.single("photo"),
   userController.uploadPhoto
 );
@@ -18,4 +19,5 @@ router.get(
   TVMW.verifyToken,
   userController.getProfilePhoto
 );
+router.get("/:userId/fetchAllClothes");
 module.exports = router;

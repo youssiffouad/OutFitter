@@ -65,10 +65,8 @@ const uploadPhoto = async (req, res) => {
       "here is the request.file i received at user controller",
       req.file
     );
-    const uploadResult = await UserServices.uploadPhoto(
-      req.file,
-      req.params.userId
-    );
+    const id = req.user.id;
+    const uploadResult = await UserServices.uploadPhoto(req.file, id);
     res.send(uploadResult);
   } catch (error) {
     console.error("Error uploading photo:", error);
@@ -94,6 +92,39 @@ const getProfilePhoto = async (req, res) => {
   }
 };
 
+//controller to get all clothes of certain user
+const fetchAllClothes = async (req, res) => {
+  try {
+    const id = req.user.id;
+  } catch (err) {}
+};
+
+//controller to add new piece of clothes for certain user
+const addNewClothes = async (req, res) => {
+  try {
+    const userid = req.user.id;
+    const photoURl = req.file;
+    const { weatherCondition, material, description, clothesCategory } =
+      req.body;
+    await UserServices.addNewPiece(
+      userid,
+      weatherCondition,
+      material,
+      description,
+      clothesCategory,
+      photoURl
+    );
+    res
+      .status(200)
+      .json({ message: "successfully added new Piece of clothes" });
+  } catch (err) {
+    console.log("an error occured while adding new Piece of clothes", err);
+    res
+      .status(500)
+      .json({ message: "internal server error failed to add new Piece", err });
+  }
+};
+
 module.exports = {
   signIn,
   signUp,
@@ -101,4 +132,5 @@ module.exports = {
   viewAllUsers,
   uploadPhoto,
   getProfilePhoto,
+  addNewClothes,
 };
