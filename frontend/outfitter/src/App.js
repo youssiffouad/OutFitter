@@ -14,6 +14,7 @@ import { AuthProvider } from "./ContextStore/authenticationStore";
 import LoginChoice from "./components/login&SignUp/Choicelogin";
 import MyProfile from "./components/Profile/profile";
 import { ProfileProvider } from "./ContextStore/profileContext";
+import InputNewPieceForm from "./components/Profile/InputNewPiece";
 
 function App() {
   const router = createBrowserRouter([
@@ -32,7 +33,7 @@ function App() {
             </ProfileProvider>
           ),
         },
-        { path: "/generator", element: <OutfitGeneratorForm /> },
+        { path: "/generator", element: <InputNewPieceForm /> },
       ],
     },
     {

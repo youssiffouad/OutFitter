@@ -7,7 +7,8 @@ import ProtectedRoute from "../../helpers/HOCProtectionRoute";
 const validationSchema = Yup.object({
   image: Yup.mixed().required("Image is required"),
   category: Yup.string().required("Category is required"),
-  color: Yup.string().required("Color is required"),
+  weatherCondition: Yup.string().required("weatherCondition is required"),
+  material: Yup.string().required("material is required"),
   description: Yup.string().required("Description is required"),
 });
 
@@ -15,10 +16,11 @@ const InputNewPieceForm = () => {
   // Initialize Formik
   const formik = useFormik({
     initialValues: {
-      image: null,
-      category: "",
-      color: "",
+      weatherCondition: "",
+      material: "",
       description: "",
+      category: "",
+      image: null,
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -31,20 +33,35 @@ const InputNewPieceForm = () => {
     <ProtectedRoute>
       <div className={styles.formContainer}>
         <form onSubmit={formik.handleSubmit} className={styles.formStyle}>
-          <h4 className="text-black mb-5">Insert new Piece</h4>
+          <h4 className="text-black mb-5 position-relative">
+            Insert new Piece
+          </h4>
           {/* Image upload */}
           <div>
-            <label htmlFor="image" style={{ top: "-25px", left: "0px" }}>
+            <label
+              htmlFor="image"
+              style={{
+                left: "0px",
+                width: "fitContent",
+                borderRadius: "5px",
+                cursor: "pointer",
+                position: "relative",
+                backgroundColor: "#494949",
+                padding: "5px",
+                color: "#d9d9d9",
+              }}
+            >
               Upload Image
             </label>
+            <p>{}</p>
             <input
+              style={{ display: "none" }}
               type="file"
               id="image"
               name="image"
               onChange={(event) =>
-                formik.setFieldValue("image", event.currentTarget.files[0])
+                formik.setFieldValue("image", event.currentTarget.n)
               }
-              style={{ cursor: "pointer" }}
             />
             {formik.touched.image && formik.errors.image && (
               <div className="text-danger">{formik.errors.image}</div>
@@ -53,8 +70,7 @@ const InputNewPieceForm = () => {
 
           {/* Category selection */}
           <div>
-            <input
-              type="text"
+            <select
               id="category"
               name="category"
               onChange={formik.handleChange}
@@ -65,7 +81,12 @@ const InputNewPieceForm = () => {
                   ? "border-danger"
                   : ""
               }`}
-            />
+            >
+              <option value="">Select a category</option>
+              <option value="category1">Category 1</option>
+              <option value="category2">Category 2</option>
+              {/* Add more options as needed */}
+            </select>
             <label
               htmlFor="category"
               className={`${
@@ -81,33 +102,77 @@ const InputNewPieceForm = () => {
             )}
           </div>
 
-          {/* Color selection */}
+          {/* Material selection */}
           <div>
-            <input
-              type="color"
-              id="color"
-              name="color"
+            <select
+              id="material"
+              name="material"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.material}
               className={`${
-                formik.touched.color && formik.errors.color
+                formik.touched.material && formik.errors.material
                   ? "border-danger"
                   : ""
               }`}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.color}
-            />
+            >
+              <option value="">Select a material</option>
+              <option value="material1">Material 1</option>
+              <option value="material2">Material 2</option>
+              {/* Add more options as needed */}
+            </select>
             <label
-              htmlFor="color"
-              style={{ top: "-10px" }}
+              htmlFor="material"
               className={`${
-                formik.touched.color && formik.errors.color ? "text-danger" : ""
+                formik.touched.material && formik.errors.material
+                  ? "text-danger"
+                  : ""
               }`}
             >
-              Color
+              Material
             </label>
-            {formik.touched.color && formik.errors.color && (
-              <div className="text-danger">{formik.errors.color}</div>
+            {formik.touched.material && formik.errors.material && (
+              <div className="text-danger">{formik.errors.material}</div>
             )}
+          </div>
+
+          {/* WeatherCondition selection */}
+          <div>
+            <select
+              id="weatherCondition"
+              name="weatherCondition"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.weatherCondition}
+              className={`${
+                formik.touched.weatherCondition &&
+                formik.errors.weatherCondition
+                  ? "border-danger"
+                  : ""
+              }`}
+            >
+              <option value="">Select a weather condition</option>
+              <option value="weatherCondition1">Weather Condition 1</option>
+              <option value="weatherCondition2">Weather Condition 2</option>
+              {/* Add more options as needed */}
+            </select>
+            <label
+              htmlFor="weatherCondition"
+              className={`${
+                formik.touched.weatherCondition &&
+                formik.errors.weatherCondition
+                  ? "text-danger"
+                  : ""
+              }`}
+            >
+              Weather Condition
+            </label>
+            {formik.touched.weatherCondition &&
+              formik.errors.weatherCondition && (
+                <div className="text-danger">
+                  {formik.errors.weatherCondition}
+                </div>
+              )}
           </div>
 
           {/* Description field */}

@@ -17,6 +17,10 @@ const Clothes = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    description: {
+      type: DataTypes.TEXT,
+    },
+    favourite: { type: DataTypes.BOOLEAN },
   },
   { timestamps: false }
 );

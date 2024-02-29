@@ -100,7 +100,7 @@ const fetchAllClothes = async (req, res) => {
 };
 
 //controller to add new piece of clothes for certain user
-const addNewClothes = async (req, res) => {
+const addNewClothesPiece = async (req, res) => {
   try {
     const userid = req.user.id;
     const photoURl = req.file;
@@ -132,5 +132,5 @@ module.exports = {
   viewAllUsers,
   uploadPhoto,
   getProfilePhoto,
-  addNewClothes,
+  addNewClothesPiece,
 };

@@ -1,9 +1,12 @@
 const path = require("path");
 const fs = require("fs");
+const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const profilePhotosDir = path.resolve("assets", "profilephotos");
+    const { phototype } = req.headers;
+    console.log("here is the phototype received at server", phototype);
+    const profilePhotosDir = path.resolve("assets", `${phototype}`);
     if (!fs.existsSync(profilePhotosDir)) {
       fs.mkdirSync(profilePhotosDir, { recursive: true });
     }

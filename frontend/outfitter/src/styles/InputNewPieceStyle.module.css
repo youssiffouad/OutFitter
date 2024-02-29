@@ -41,7 +41,7 @@
     top: -12px;
     left: 6px;
     background-color: white;
-    padding: 2px;
+    padding: 0px 4px 0px 4px;
   }
 
   /* Style for form labels */
@@ -53,9 +53,10 @@
   /* Style for input and textarea fields */
   input[type="text"],
   input[type="color"],
+  select,
   textarea {
     width: 100%;
-    padding: 10px;
+    padding: 15px 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: white;

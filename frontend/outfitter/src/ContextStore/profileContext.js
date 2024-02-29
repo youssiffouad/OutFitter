@@ -49,11 +49,14 @@ export const ProfileProvider = ({ children }) => {
     console.log("here is the selected file", selectedProfilePhoto);
 
     try {
+      const token = localStorage.getItem("token");
+      console.log("here is the from data st client", formData.phototype);
       const response = await fetch(
-        `http://localhost:${backendport}/user/${userid}/uploadprofilephoto`,
+        `http://localhost:${backendport}/user/uploadprofilephoto`,
         {
           method: "POST",
           body: formData,
+          headers: { authorization: token, phototype: "profilephotos" },
         }
       );
       if (!response.ok) {
