@@ -18,6 +18,7 @@ export const ProfileProvider = ({ children }) => {
   const [photofetched, setphotofetched] = useState(false);
   const userid = useSelector((state) => state.user.user);
 
+  //fn to fetch profile photo from server
   const getProfilePhoto = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -38,6 +39,7 @@ export const ProfileProvider = ({ children }) => {
     }
   };
 
+  //fn to handle upload of profilr pic
   const handleUpload = async () => {
     if (!selectedProfilePhoto) {
       alert("Please select a file");

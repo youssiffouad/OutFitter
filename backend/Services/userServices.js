@@ -105,6 +105,7 @@ const getAllClothes = async (id) => {
       ],
     });
     console.log("here are the clothes of the user that i got", clothes);
+    return clothes;
   } catch (err) {
     console.log("failed to get clothes of user", err);
     throw err;
@@ -128,6 +129,7 @@ const addNewPiece = async (
       description: description,
       clothesCategory_id: clothesCategory,
       photo: photoURL,
+      favourite: false,
     });
   } catch (err) {
     console.log("failed to add new clothes piece for certain user", err);

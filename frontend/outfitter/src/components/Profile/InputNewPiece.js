@@ -2,6 +2,17 @@ import styles from "../../styles/InputNewPieceStyle.module.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import ProtectedRoute from "../../helpers/HOCProtectionRoute";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchAllClothes,
+  addNewClothesPiece,
+  setSelectedClothesPiece,
+} from "../../reduxStore/ClothesSlice";
+import { fetchMaterials } from "../../reduxStore/materialSlice";
+import { fetchWeatherConditions } from "../../reduxStore/weatherSlice";
+import { useEffect } from "react";
+// import { useContext } from "react";
+// import { ClothesContext } from "../../ContextStore/clothesContext";
 
 // Define your validation schema using Yup
 const validationSchema = Yup.object({
@@ -13,6 +24,26 @@ const validationSchema = Yup.object({
 });
 
 const InputNewPieceForm = () => {
+  const dispatch = useDispatch();
+  const weatherConditions = useSelector((state) => state.weather);
+  const selectedClothesPiece = useSelector(
+    (state) => state.clothes.selectedClothesPiece
+  );
+  console.log("here are the weather conditions", weatherConditions);
+  const materials = useSelector((state) => state.material);
+  useEffect(() => {
+    // dispatch(fetchAllClothes());
+    dispatch(fetchMaterials());
+    dispatch(fetchWeatherConditions());
+  }, []);
+
+  // const {
+  //   selectedClothesPiece,
+  //   handlePieceSelection,
+  //   AddNewClothesPiece,
+  //   weatherConditions,
+  //   Materials,
+  // } = useContext(ClothesContext);
   // Initialize Formik
   const formik = useFormik({
     initialValues: {
@@ -24,6 +55,14 @@ const InputNewPieceForm = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
+      const formdata = new FormData();
+      formdata.append("clothesimg", formik.values.image);
+      formdata.append("category", formik.values.category);
+      formdata.append("description", formik.values.description);
+      formdata.append("material", formik.values.material);
+      formdata.append("weatherCondition", formik.values.weatherCondition);
+      dispatch(addNewClothesPiece(formdata));
+      //AddNewClothesPiece(formdata);
       // Handle form submission logic here
       console.log(values);
     },
@@ -37,12 +76,13 @@ const InputNewPieceForm = () => {
             Insert new Piece
           </h4>
           {/* Image upload */}
-          <div>
+          <div style={{ display: "flex", justifyContent: "flexstart" }}>
             <label
               htmlFor="image"
               style={{
                 left: "0px",
-                width: "fitContent",
+                top: "-5px",
+                width: "fit-content",
                 borderRadius: "5px",
                 cursor: "pointer",
                 position: "relative",
@@ -53,15 +93,19 @@ const InputNewPieceForm = () => {
             >
               Upload Image
             </label>
-            <p>{}</p>
+            {<p>{selectedClothesPiece}</p>}
             <input
               style={{ display: "none" }}
               type="file"
               id="image"
               name="image"
-              onChange={(event) =>
-                formik.setFieldValue("image", event.currentTarget.n)
-              }
+              onChange={(event) => {
+                console.log("curr target", event.currentTarget);
+                console.log(" target", event.target.files[0].name);
+                formik.setFieldValue("image", event.target.files[0]);
+                dispatch(setSelectedClothesPiece(event.target.files[0].name));
+                // handlePieceSelection(event.target.files[0].name);
+              }}
             />
             {formik.touched.image && formik.errors.image && (
               <div className="text-danger">{formik.errors.image}</div>
@@ -116,10 +160,12 @@ const InputNewPieceForm = () => {
                   : ""
               }`}
             >
-              <option value="">Select a material</option>
-              <option value="material1">Material 1</option>
-              <option value="material2">Material 2</option>
-              {/* Add more options as needed */}
+              <option value="">select a material</option>
+              {materials.map((mat) => (
+                <option key={mat.id} value={mat.id}>
+                  {mat.name}
+                </option>
+              ))}
             </select>
             <label
               htmlFor="material"
@@ -152,9 +198,11 @@ const InputNewPieceForm = () => {
               }`}
             >
               <option value="">Select a weather condition</option>
-              <option value="weatherCondition1">Weather Condition 1</option>
-              <option value="weatherCondition2">Weather Condition 2</option>
-              {/* Add more options as needed */}
+              {weatherConditions.map((cond) => (
+                <option value={cond.id} key={cond.id}>
+                  {cond.name}
+                </option>
+              ))}
             </select>
             <label
               htmlFor="weatherCondition"

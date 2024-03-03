@@ -19,10 +19,16 @@ router.get(
   TVMW.verifyToken,
   userController.getProfilePhoto
 );
-router.get(
+router.post(
   "/addNewClothesPiece",
   TVMW.verifyToken,
-  photoUpload.storageHandler.single("photo"),
+  photoUpload.storageHandler.single("clothesimg"),
   userController.addNewClothesPiece
+);
+
+router.get(
+  "/fetchAllClothes",
+  TVMW.verifyToken,
+  userController.fetchAllClothes
 );
 module.exports = router;

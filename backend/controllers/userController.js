@@ -92,18 +92,40 @@ const getProfilePhoto = async (req, res) => {
   }
 };
 
-//controller to get all clothes of certain user
+// Controller to get all clothes of a certain user
 const fetchAllClothes = async (req, res) => {
   try {
     const id = req.user.id;
-  } catch (err) {}
+    const clothesData = await UserServices.getAllClothes(id);
+
+    // Iterate through clothesData and replace photo URL with photo itself
+    for (const cloth of clothesData) {
+      const photoPath = cloth.photo; // Assuming the property name is photoPath
+      const photoData = fs.readFileSync(photoPath);
+      const photoBase64 = Buffer.from(photoData).toString("base64");
+      // Replace the photo path with base64 encoded photo data
+      cloth.photo = photoBase64;
+    }
+
+    // Send the modified clothesData as the response
+    res.status(200).json(clothesData);
+  } catch (err) {
+    // Handle errors
+    console.error("error fetching data", err);
+    res.status(500).json({ error: err.message });
+  }
 };
 
 //controller to add new piece of clothes for certain user
 const addNewClothesPiece = async (req, res) => {
   try {
+    console.log(
+      "here is the reuqest . user ---------------------------->",
+      req.user
+    );
     const userid = req.user.id;
-    const photoURl = req.file;
+    const photoURl = req.file.path;
+    console.log("here is the poturl at contoller ----------->", photoURl);
     const { weatherCondition, material, description, clothesCategory } =
       req.body;
     await UserServices.addNewPiece(
@@ -133,4 +155,5 @@ module.exports = {
   uploadPhoto,
   getProfilePhoto,
   addNewClothesPiece,
+  fetchAllClothes,
 };

@@ -8,6 +8,7 @@ const verifyToken = async (req, res, next) => {
     }
     const decoded = jwt.verify(token, "outfitter");
     req.user = decoded;
+    console.log("here is the request ,BBBBoDDY", req.body);
     next();
   } catch (err) {
     console.log("error in token verification", err);

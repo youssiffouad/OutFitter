@@ -15,6 +15,9 @@ import LoginChoice from "./components/login&SignUp/Choicelogin";
 import MyProfile from "./components/Profile/profile";
 import { ProfileProvider } from "./ContextStore/profileContext";
 import InputNewPieceForm from "./components/Profile/InputNewPiece";
+import { ClothesCtxProvider } from "./ContextStore/clothesContext";
+import { WeahterProvider } from "./ContextStore/weatherContext";
+import { MaterialProvider } from "./ContextStore/materialContext";
 
 function App() {
   const router = createBrowserRouter([
@@ -33,7 +36,18 @@ function App() {
             </ProfileProvider>
           ),
         },
-        { path: "/generator", element: <InputNewPieceForm /> },
+        {
+          path: "/generator",
+          element: (
+            // <WeahterProvider>
+            //   <MaterialProvider>
+            //     <ClothesCtxProvider>
+            <InputNewPieceForm />
+            //     </ClothesCtxProvider>
+            //   </MaterialProvider>
+            // </WeahterProvider>
+          ),
+        },
       ],
     },
     {

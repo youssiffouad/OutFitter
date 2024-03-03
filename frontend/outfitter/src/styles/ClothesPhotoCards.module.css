@@ -1,30 +1,103 @@
 .gridContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 }
 
 .Card {
-  height: fit-content;
+  height: 50vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  position: relative;
   background-color: darkgrey;
   flex-direction: column;
   margin: 5%;
   padding: 3%;
+  border-radius: 5px;
+  box-shadow: 0 0 3px white;
 }
 .ImgContainer {
   height: 70%;
   width: 90%;
   position: relative;
+  overflow: visible;
+  box-shadow: 0 0 3px 0px #373737;
+  border-radius: 5px;
+}
+.ImgContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+  object-position: 50% 50%;
+}
+.ImgContainer img:hover {
+  cursor: pointer;
 }
 .favIcon {
+  background-color: grey;
   position: absolute;
-  top: 10%;
-  right: 10%;
+  top: 6%;
+  right: -12%;
+  padding: 5px 5px 2px 5px;
+  border-radius: 6px;
+  box-shadow: 0 0 10px black;
+  overflow: visible;
+}
+.favIcon:hover {
+  cursor: pointer;
+}
+.favIcon:hover::after {
+  content: "Add to favorites";
+  position: absolute;
+  top: 100%; /* Adjust the distance from the top */
+  left: 50%; /* Adjust the horizontal position */
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8); /* Background color of the tooltip */
+  color: #fff; /* Text color of the tooltip */
+  padding: 5px 10px; /* Padding around the text */
+  border-radius: 5px; /* Border radius to round the corners */
+  font-size: 12px; /* Adjust the font size */
 }
 
 .ImgAtts {
   display: flex;
   flex-direction: column;
+}
+.ImgAtts > p {
+  margin-bottom: 0 !important;
+}
+.ImgAtts > h6 {
+  height: 22px;
+}
+.ImgAtts > * {
+  overflow: hidden;
+}
+
+.trashContainer {
+  position: absolute;
+  background-color: grey;
+  padding: 3px 5px 3px 5px;
+  border-radius: 5px;
+  bottom: 12%;
+  right: 5%;
+  box-shadow: 0 0 6px black;
+  cursor: pointer;
+  overflow: visible;
+  opacity: 20%;
+  transition: all 0.3s ease;
+}
+.trashContainer:hover {
+  opacity: 100%;
+}
+.trashContainer:hover::after {
+  content: "delete item";
+  position: absolute;
+  top: 100%; /* Adjust the distance from the top */
+  left: 50%; /* Adjust the horizontal position */
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8); /* Background color of the tooltip */
+  color: #fff; /* Text color of the tooltip */
+  padding: 5px 10px; /* Padding around the text */
+  border-radius: 5px; /* Border radius to round the corners */
+  font-size: 12px; /* Adjust the font size */
 }
