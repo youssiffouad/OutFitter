@@ -23,6 +23,7 @@ const deleteClothesItem = async (id) => {
     const clothesItem = await Clothes.findByPk(id);
     const path = await clothesItem.get("photo");
     console.log("here is the path i got ", path);
+    await clothesItem.destroy();
     return path;
   } catch (err) {
     console.log("failed to delete clothes item", err);

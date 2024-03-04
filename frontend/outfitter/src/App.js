@@ -8,16 +8,12 @@ import {
   Navigate,
   RouterProvider,
 } from "react-router-dom";
-import OutfitGeneratorForm from "./components/Generator/outfitGeneratorForm";
 
 import { AuthProvider } from "./ContextStore/authenticationStore";
 import LoginChoice from "./components/login&SignUp/Choicelogin";
 import MyProfile from "./components/Profile/profile";
 import { ProfileProvider } from "./ContextStore/profileContext";
-import InputNewPieceForm from "./components/Profile/InputNewPiece";
-import { ClothesCtxProvider } from "./ContextStore/clothesContext";
-import { WeahterProvider } from "./ContextStore/weatherContext";
-import { MaterialProvider } from "./ContextStore/materialContext";
+import InputNewPieceForm from "./components/Profile/FormInputNewPiece";
 
 function App() {
   const router = createBrowserRouter([
@@ -38,15 +34,7 @@ function App() {
         },
         {
           path: "/generator",
-          element: (
-            // <WeahterProvider>
-            //   <MaterialProvider>
-            //     <ClothesCtxProvider>
-            <InputNewPieceForm />
-            //     </ClothesCtxProvider>
-            //   </MaterialProvider>
-            // </WeahterProvider>
-          ),
+          element: <InputNewPieceForm />,
         },
       ],
     },

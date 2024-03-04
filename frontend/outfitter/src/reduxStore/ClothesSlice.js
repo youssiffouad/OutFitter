@@ -43,7 +43,7 @@ export const addNewClothesPiece = createAsyncThunk(
         "here is the reponse meg from server on adding new piece",
         data
       );
-      //dispatch(fetchAllClothes());
+      dispatch(fetchAllClothes());
     } catch (error) {
       throw new Error("An error occurred while adding new clothes piece");
     }
@@ -132,6 +132,7 @@ export const clothesSlice = createSlice({
   initialState: {
     clothesItems: [],
     selectedClothesPiece: "",
+    displayForm: true,
   },
   reducers: {
     setClothes: (state, action) => {
@@ -140,9 +141,13 @@ export const clothesSlice = createSlice({
     setSelectedClothesPiece: (state, action) => {
       state.selectedClothesPiece = action.payload;
     },
+    setdispalyForm: (state, action) => {
+      state.displayForm = action.payload;
+    },
   },
 });
 
-export const { setClothes, setSelectedClothesPiece } = clothesSlice.actions;
+export const { setClothes, setSelectedClothesPiece, setdispalyForm } =
+  clothesSlice.actions;
 
 export default clothesSlice.reducer;

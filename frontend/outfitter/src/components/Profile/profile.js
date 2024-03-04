@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { ProfileContext } from "../../ContextStore/profileContext";
 import styles from "../../styles/profile.module.css";
 import Gallery from "./gallery";
+import NewClothesPiece from "./addNewPiece";
 
 const MyProfile = () => {
   const { photoURL, handleFileChange } = useContext(ProfileContext);
@@ -34,6 +35,7 @@ const MyProfile = () => {
           </div>
         </div>
       </div>
+      <NewClothesPiece />
       <Gallery />
     </div>
   );
