@@ -100,7 +100,7 @@ const fetchAllClothes = async (req, res) => {
 
     // Iterate through clothesData and replace photo URL with photo itself
     for (const cloth of clothesData) {
-      const photoPath = cloth.photo; // Assuming the property name is photoPath
+      const photoPath = cloth.photo; // where the property photo is photoPath
       const photoData = fs.readFileSync(photoPath);
       const photoBase64 = Buffer.from(photoData).toString("base64");
       // Replace the photo path with base64 encoded photo data
@@ -108,7 +108,12 @@ const fetchAllClothes = async (req, res) => {
     }
 
     // Send the modified clothesData as the response
-    res.status(200).json(clothesData);
+    res
+      .status(200)
+      .json({
+        message: "successfully fetched clothes from server",
+        clothesData,
+      });
   } catch (err) {
     // Handle errors
     console.error("error fetching data", err);

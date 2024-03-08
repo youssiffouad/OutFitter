@@ -1,14 +1,14 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAdd } from "@fortawesome/free-solid-svg-icons";
 import usePopUp from "../../hooks/use_popup";
-import InputNewPieceForm from "./FormInputNewPiece";
+import OutfitGeneratorForm from "./FormGenerateOutfit";
 import { createPortal } from "react-dom";
 import { useDispatch } from "react-redux";
 import { setdisplayAddPiecceForm } from "../../reduxStore/ClothesSlice";
-const NewClothesPiece = () => {
+const GenerateNewOutfit = () => {
   const { FormContent, controlFormJSX } = usePopUp();
   const dispatch = useDispatch();
-  const payloadform = <InputNewPieceForm />;
+  const payloadform = <OutfitGeneratorForm />;
   const handleADD = () => {
     dispatch(setdisplayAddPiecceForm(true));
     controlFormJSX(payloadform);
@@ -21,7 +21,7 @@ const NewClothesPiece = () => {
         className="btn btn-secondary d-flex align-items-center"
         onClick={handleADD}
       >
-        add new Clothes Item{" "}
+        Generate New Outfit{" "}
         <FontAwesomeIcon
           icon={faAdd}
           style={{
@@ -35,4 +35,4 @@ const NewClothesPiece = () => {
     </div>
   );
 };
-export default NewClothesPiece;
+export default GenerateNewOutfit;

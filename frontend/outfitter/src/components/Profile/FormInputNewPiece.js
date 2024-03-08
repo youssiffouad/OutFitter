@@ -11,6 +11,7 @@ import {
 import { fetchMaterials } from "../../reduxStore/materialSlice";
 import { fetchWeatherConditions } from "../../reduxStore/weatherSlice";
 import { useEffect } from "react";
+import usePopUp from "../../hooks/use_popup";
 
 // Define your validation schema using Yup
 const validationSchema = Yup.object({
@@ -24,11 +25,12 @@ const validationSchema = Yup.object({
 const InputNewPieceForm = () => {
   const dispatch = useDispatch();
   const weatherConditions = useSelector((state) => state.weather);
+
   const selectedClothesPiece = useSelector(
     (state) => state.clothes.selectedClothesPiece
   );
   const materials = useSelector((state) => state.material);
-  const display = useSelector((state) => state.clothes.displayForm);
+  const display = useSelector((state) => state.clothes.displayAddPiecceForm);
 
   const formik = useFormik({
     initialValues: {
@@ -47,7 +49,6 @@ const InputNewPieceForm = () => {
       formdata.append("material", formik.values.material);
       formdata.append("weatherCondition", formik.values.weatherCondition);
       dispatch(addNewClothesPiece(formdata));
-      dispatch(setdispalyForm(false));
       console.log(values);
     },
   });

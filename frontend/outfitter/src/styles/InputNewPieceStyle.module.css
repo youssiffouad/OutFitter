@@ -8,14 +8,17 @@
   justify-content: center;
   align-items: center;
 }
+.formStyle h4 {
+  overflow: visible;
+}
 .formStyle h4::after {
   position: absolute;
   content: "";
-  top: 17%;
-  left: 0;
-  width: 100%;
+  top: 120%;
+  left: -8%;
+  width: 117%;
   height: 2px;
-  background-color: #cccccca1;
+  background-color: #4949494f;
 }
 .formStyle {
   position: relative;

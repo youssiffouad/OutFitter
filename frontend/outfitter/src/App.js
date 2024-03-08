@@ -13,7 +13,7 @@ import { AuthProvider } from "./ContextStore/authenticationStore";
 import LoginChoice from "./components/login&SignUp/Choicelogin";
 import MyProfile from "./components/Profile/profile";
 import { ProfileProvider } from "./ContextStore/profileContext";
-import InputNewPieceForm from "./components/Profile/FormInputNewPiece";
+import Generator from "./components/Generator/generator";
 
 function App() {
   const router = createBrowserRouter([
@@ -34,7 +34,7 @@ function App() {
         },
         {
           path: "/generator",
-          element: <InputNewPieceForm />,
+          element: <Generator />,
         },
       ],
     },

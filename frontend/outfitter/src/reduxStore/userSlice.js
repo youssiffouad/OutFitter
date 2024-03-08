@@ -74,7 +74,6 @@ export const signUp = (userData) => async (dispatch) => {
 
 // Action creator for login process (to get JWT token)
 export const login = (credentials, navigate) => async (dispatch) => {
-  //const navigate = useNavigate();
   try {
     // Dispatch loading action
     dispatch(setLoading(true));

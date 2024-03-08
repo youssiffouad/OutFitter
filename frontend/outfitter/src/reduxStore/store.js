@@ -4,6 +4,7 @@ import userReducer from "./userSlice";
 import clothesReducer from "./ClothesSlice";
 import weatherReducer from "./weatherSlice";
 import materialReducer from "./materialSlice";
+import outfitReducer from "./OutfitSlice";
 
 const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
     clothes: clothesReducer,
     material: materialReducer,
     weather: weatherReducer,
+    outfit: outfitReducer,
   },
 });
 

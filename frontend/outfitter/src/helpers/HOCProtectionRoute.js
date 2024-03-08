@@ -8,14 +8,17 @@ const ProtectedRoute = (props) => {
   return userlogged ? (
     props.children
   ) : (
-    <div className="d-flex flex-column align-items-center">
-      <h1 className="text-center text-bg-danger">please login first</h1>
-      <button
-        className="btn bg-body-secondary"
-        onClick={() => navigate("/login")}
-      >
-        Go to Login Page
-      </button>
+    <div className="overlay">
+      {" "}
+      <div className="d-flex flex-column align-items-center">
+        <h1 className="text-center text-bg-danger">please login first</h1>
+        <button
+          className="btn bg-body-secondary"
+          onClick={() => navigate("/login")}
+        >
+          Go to Login Page
+        </button>
+      </div>
     </div>
   );
 };

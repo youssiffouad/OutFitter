@@ -39,7 +39,10 @@ const ClothesPhotoCard = (props) => {
       <div className={styles.trashContainer}>
         <FontAwesomeIcon
           icon={faTrash}
-          onClick={() => dispatch(deleteClothesItem(props.id))}
+          onClick={() => {
+            const params = { id: props.id };
+            dispatch(deleteClothesItem(props.id));
+          }}
         />
       </div>
     </div>
