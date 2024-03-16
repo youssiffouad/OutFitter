@@ -2,141 +2,227 @@ import styles from "../../styles/InputNewPieceStyle.module.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import ProtectedRoute from "../../helpers/HOCProtectionRoute";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  generateNewOutfit,
+  setdisplayAddOutfitForm,
+} from "../../reduxStore/OutfitSlice";
+import { useEffect } from "react";
+import { fetchWeatherConditions } from "../../reduxStore/weatherSlice";
+import { fetchModes } from "../../reduxStore/modeSlice";
+import { fetchOccasions } from "../../reduxStore/occasionSlice";
 
 // Define your validation schema using Yup
 const validationSchema = Yup.object({
-  image: Yup.mixed().required("Image is required"),
   occasion: Yup.string().required("occasion is required"),
-  favouritecolor: Yup.string().required("favouritecolor is required"),
-  dayornight: Yup.string().required("dayornight is required"),
+  dayornight: Yup.string().required("day Time is required"),
+  weatherCondition: Yup.string().required("weather condition is required"),
+  mode: Yup.string().required("Mode is required"),
 });
 
 const OutfitGeneratorForm = () => {
+  const dispatch = useDispatch();
+  const occasions = useSelector((state) => state.occasion);
+  const weatherConditions = useSelector((state) => state.weather);
+  const modes = useSelector((state) => state.mode);
+  const display = useSelector((state) => state.outfit.displayAddOutfitForm);
   // Initialize Formik
   const formik = useFormik({
     initialValues: {
-      image: null,
       occasion: "",
-      favouritecolor: "",
       dayornight: "",
+      weatherCondition: "",
+      mode: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
       // Handle form submission logic here
-      console.log(values);
+      dispatch(generateNewOutfit(values));
     },
   });
 
+  useEffect(() => {
+    dispatch(fetchWeatherConditions());
+    dispatch(fetchModes());
+    dispatch(fetchOccasions());
+  }, []);
+
   return (
-    <div className="overlay">
+    display && (
       <ProtectedRoute>
-        <div className={styles.formContainer}>
-          <form onSubmit={formik.handleSubmit} className={styles.formStyle}>
-            <h4 className="text-black mb-5 position-relative">
-              Generate Outfit
-            </h4>
-            {/* Image upload */}
+        <div className="overlay">
+          <div className={styles.formContainer}>
+            <form onSubmit={formik.handleSubmit} className={styles.formStyle}>
+              <h4 className="text-black mb-5 position-relative">
+                Generate Outfit
+              </h4>
+              {/* Image upload */}
 
-            {/* occasion selection */}
-            <div>
-              <input
-                type="text"
-                id="occasion"
-                name="occasion"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.occasion}
-                className={`${
-                  formik.touched.occasion && formik.errors.occasion
-                    ? "border-danger"
-                    : ""
-                }`}
-              />
-              <label
-                htmlFor="occasion"
-                className={`${
-                  formik.touched.occasion && formik.errors.occasion
-                    ? "text-danger"
-                    : ""
-                }`}
-              >
-                occasion
-              </label>
-              {formik.touched.occasion && formik.errors.occasion && (
-                <div className="text-danger">{formik.errors.occasion}</div>
-              )}
-            </div>
-
-            {/* favouritecolor selection */}
-            <div>
-              <input
-                type="color"
-                id="favouritecolor"
-                name="favouritecolor"
-                className={`${
-                  formik.touched.favouritecolor && formik.errors.favouritecolor
-                    ? "border-danger"
-                    : ""
-                }`}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.favouritecolor}
-              />
-              <label
-                htmlFor="favouritecolor"
-                style={{ top: "-10px" }}
-                className={`${
-                  formik.touched.favouritecolor && formik.errors.favouritecolor
-                    ? "text-danger"
-                    : ""
-                }`}
-              >
-                Favourite Color
-              </label>
-              {formik.touched.favouritecolor &&
-                formik.errors.favouritecolor && (
-                  <div className="text-danger">
-                    {formik.errors.favouritecolor}
-                  </div>
+              {/* occasion selection */}
+              <div>
+                <select
+                  id="occasion"
+                  name="occasion"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.occasion}
+                  className={`${
+                    formik.touched.occasion && formik.errors.occasion
+                      ? "border-danger"
+                      : ""
+                  }`}
+                >
+                  <option value="">Select a occasion</option>
+                  {occasions.map((occasion) => (
+                    <option key={occasion.id} value={occasion.id}>
+                      {occasion.name}
+                    </option>
+                  ))}
+                  {/* Add more options as needed */}
+                </select>
+                <label
+                  htmlFor="occasion"
+                  className={`${
+                    formik.touched.occasion && formik.errors.occasion
+                      ? "text-danger"
+                      : ""
+                  }`}
+                >
+                  Occasion
+                </label>
+                {formik.touched.occasion && formik.errors.occasion && (
+                  <div className="text-danger">{formik.errors.occasion}</div>
                 )}
-            </div>
+              </div>
 
-            {/* dayornight field */}
-            <div>
-              <input
-                type="text"
-                id="dayornight"
-                name="dayornight"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.dayornight}
-                className={`${
-                  formik.touched.dayornight && formik.errors.dayornight
-                    ? "border-danger"
-                    : ""
-                }`}
-              />
-              <label
-                htmlFor="dayornight "
-                className={`${
-                  formik.touched.dayornight && formik.errors.dayornight
-                    ? "text-danger"
-                    : ""
-                }`}
-              >
-                Day or Night
-              </label>
-              {formik.touched.dayornight && formik.errors.dayornight && (
-                <div className="text-danger">{formik.errors.dayornight}</div>
-              )}
-            </div>
+              {/* day or night selection */}
+              <div>
+                <select
+                  id="dayornight"
+                  name="dayornight"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.dayornight}
+                  className={`${
+                    formik.touched.dayornight && formik.errors.dayornight
+                      ? "border-danger"
+                      : ""
+                  }`}
+                >
+                  <option value="">Select day or night</option>
+                  <option value="day">day</option>
+                  <option value="night">night</option>
+                  {/* Add more options as needed */}
+                </select>
+                <label
+                  htmlFor="dayornight"
+                  className={`${
+                    formik.touched.dayornight && formik.errors.dayornight
+                      ? "text-danger"
+                      : ""
+                  }`}
+                >
+                  Day or Night
+                </label>
+                {formik.touched.dayornight && formik.errors.dayornight && (
+                  <div className="text-danger">{formik.errors.dayornight}</div>
+                )}
+              </div>
 
-            {/* Submit button */}
-            <button type="submit">Submit</button>
-          </form>
+              {/* weatherCondition field */}
+              <div>
+                <select
+                  id="weatherCondition"
+                  name="weatherCondition"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.weatherCondition}
+                  className={`${
+                    formik.touched.weatherCondition &&
+                    formik.errors.weatherCondition
+                      ? "border-danger"
+                      : ""
+                  }`}
+                >
+                  <option value="">Select Weather Condition</option>
+                  {weatherConditions.map((condition) => (
+                    <option key={condition.id} value={condition.id}>
+                      {condition.name}
+                    </option>
+                  ))}
+                  {/* Add more options as needed */}
+                </select>
+                <label
+                  htmlFor="weatherCondition"
+                  className={`${
+                    formik.touched.weatherCondition &&
+                    formik.errors.weatherCondition
+                      ? "text-danger"
+                      : ""
+                  }`}
+                >
+                  Weather Condition
+                </label>
+                {formik.touched.weatherCondition &&
+                  formik.errors.weatherCondition && (
+                    <div className="text-danger">
+                      {formik.errors.weatherCondition}
+                    </div>
+                  )}
+              </div>
+
+              {/* mode field */}
+              <div>
+                <select
+                  id="mode"
+                  name="mode"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.mode}
+                  className={`${
+                    formik.touched.mode && formik.errors.mode
+                      ? "border-danger"
+                      : ""
+                  }`}
+                >
+                  <option value="">Select mode</option>
+                  {modes.map((mode) => (
+                    <option key={mode.id} value={mode.id}>
+                      {mode.name}
+                    </option>
+                  ))}
+                  {/* Add more options as needed */}
+                </select>
+                <label
+                  htmlFor="mode"
+                  className={`${
+                    formik.touched.mode && formik.errors.mode
+                      ? "text-danger"
+                      : ""
+                  }`}
+                >
+                  mode
+                </label>
+                {formik.touched.mode && formik.errors.mode && (
+                  <div className="text-danger">{formik.errors.mode}</div>
+                )}
+              </div>
+              {/* Submit button */}
+              <div className="d-flex justify-content-around m-0">
+                <button type="submit">Submit</button>
+                <button
+                  type="button"
+                  className="bg-danger"
+                  onClick={() => dispatch(setdisplayAddOutfitForm(false))}
+                >
+                  cancel
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </ProtectedRoute>
-    </div>
+    )
   );
 };
 

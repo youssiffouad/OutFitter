@@ -14,8 +14,6 @@ const MyProfile = () => {
 
   const { Msgcomponent, controlDisplay, controlMsgContent } = usePopUp();
   useEffect(() => {
-    console.log("from useeffect here is the msg component", Msgcomponent);
-    console.log("from useeffect here is the msg text", popupMsgText);
     controlDisplay(popupDisplay);
     controlMsgContent(popupMsgText);
   }, [

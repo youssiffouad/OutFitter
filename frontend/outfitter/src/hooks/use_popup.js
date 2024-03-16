@@ -1,7 +1,10 @@
 import { useState } from "react";
 import "../styles/pop-up.css";
 import { useDispatch } from "react-redux";
-import { setPopupDisplay } from "../reduxStore/ClothesSlice";
+import {
+  setPopupDisplay,
+  setdisplayAddPiecceForm,
+} from "../reduxStore/ClothesSlice";
 
 const usePopUp = () => {
   const [display, setdisplay] = useState(false);
@@ -21,6 +24,7 @@ const usePopUp = () => {
     console.log("here is the form i received", arg);
     setformJSX(arg);
   };
+
   const Msgcomponent = () => {
     console.log("w b3deeeeeeeeeeeeeneeeeeeee");
     console.log(display);

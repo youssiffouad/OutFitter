@@ -1,6 +1,10 @@
 const User = require("../models/User");
 const Clothes = require("../models/Clothes");
+const OutfitClothes = require("../models/OutfitClothes");
+const Outfits = require("../models/Outfit");
 const WeatherCondition = require("../models/weatherCondition");
+const Mode = require("../models/Mode");
+const Occasion = require("../models/OccasionTypes");
 const CLothesCategory = require("../models/ClothesCategory");
 const Material = require("../models/Material");
 const bcrypt = require("bcrypt");
@@ -20,7 +24,6 @@ const signUp = async (userData) => {
 };
 
 // userServices.js
-
 const signIn = async (username, password) => {
   try {
     const userFromDB = await User.findOne({ where: { name: username } });
@@ -104,10 +107,37 @@ const getAllClothes = async (id) => {
         { model: CLothesCategory },
       ],
     });
-    console.log("here are the clothes of the user that i got", clothes);
+    // console.log("here are the clothes of the user that i got", clothes);
     return clothes;
   } catch (err) {
     console.log("failed to get clothes of user", err);
+    throw err;
+  }
+};
+
+/*
+ *** description----> fn to get all outfits of certain user
+ *** args--->id of hte user
+ *** return--->outfits with urls
+ */
+const getAllOutfits = async (id) => {
+  try {
+    const outfits = await Outfits.findAll({
+      where: { user_id: id },
+      include: [
+        { model: WeatherCondition },
+        { model: Mode },
+        { model: Occasion },
+        { model: Clothes, through: OutfitClothes },
+      ],
+    });
+    console.log(
+      "here are hte outfits------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>",
+      outfits
+    );
+    return outfits;
+  } catch (err) {
+    console.log("failed to get OUTFITS of user", err);
     throw err;
   }
 };
@@ -146,5 +176,6 @@ module.exports = {
   uploadPhoto,
   getProfilePhoto,
   getAllClothes,
+  getAllOutfits,
   addNewPiece,
 };

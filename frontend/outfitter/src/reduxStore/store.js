@@ -5,6 +5,8 @@ import clothesReducer from "./ClothesSlice";
 import weatherReducer from "./weatherSlice";
 import materialReducer from "./materialSlice";
 import outfitReducer from "./OutfitSlice";
+import occasionReducer from "./occasionSlice";
+import modeReducer from "./modeSlice";
 
 const store = configureStore({
   reducer: {
@@ -13,6 +15,8 @@ const store = configureStore({
     material: materialReducer,
     weather: weatherReducer,
     outfit: outfitReducer,
+    occasion: occasionReducer,
+    mode: modeReducer,
   },
 });
 

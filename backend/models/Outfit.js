@@ -16,7 +16,7 @@ const Outfit = sequelize.define(
       autoIncrement: true,
     },
 
-    name: DataTypes.TEXT,
+    favourite: DataTypes.BOOLEAN,
     description: DataTypes.TEXT,
     created_at: {
       type: DataTypes.DATE,
@@ -105,7 +105,7 @@ Outfit.belongsTo(Occasion, {
 });
 
 // Synchronize models with the database
-Outfit.sync({}) // Set force:true to drop existing tables if any and recreate them
+Outfit.sync() // Set force:true to drop existing tables if any and recreate them
   .then(() => {
     console.log("Outfit Table created successfully.");
   })

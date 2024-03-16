@@ -6,6 +6,7 @@ const {
   handleSignUpError,
   handlePasswordChangeError,
 } = require("../errorHandling/userErrorHandling");
+const { ReplaceUrlwithData } = require("../middleware/replaceURlwithData");
 
 const signIn = async (req, res) => {
   try {
@@ -108,12 +109,38 @@ const fetchAllClothes = async (req, res) => {
     }
 
     // Send the modified clothesData as the response
-    res
-      .status(200)
-      .json({
-        message: "successfully fetched clothes from server",
-        clothesData,
-      });
+    res.status(200).json({
+      message: "successfully fetched clothes from server",
+      clothesData,
+    });
+  } catch (err) {
+    // Handle errors
+    console.error("error fetching data", err);
+    res.status(500).json({ error: err.message });
+  }
+};
+/*
+ *** controller to fetch all Outfits for cerain user
+ */
+const fetchAllOutfits = async (req, res) => {
+  try {
+    const id = req.user.id;
+    let outfits = await UserServices.getAllOutfits(id);
+
+    // Iterate through clothes inside every outfit and replace photo URL with photo itself
+    for (let i = 0; i < outfits.length; i++) {
+      for (let j = 0; j < outfits[i].Clothes.length; j++) {
+        outfits[i].Clothes[j].photo = await ReplaceUrlwithData(
+          outfits[i].Clothes[j].photo
+        );
+      }
+    }
+
+    // Send the modified outfits as the response
+    res.status(200).json({
+      message: "successfully fetched outfits from server",
+      outfits,
+    });
   } catch (err) {
     // Handle errors
     console.error("error fetching data", err);
@@ -161,4 +188,5 @@ module.exports = {
   getProfilePhoto,
   addNewClothesPiece,
   fetchAllClothes,
+  fetchAllOutfits,
 };

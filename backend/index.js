@@ -6,6 +6,7 @@ const materialRoutes = require("./routes/materialsRoute");
 const clothesRoutes = require("./routes/clothesRoutes");
 const modeRoutes = require("./routes/modeRoutes");
 const occasionRoutes = require("./routes/OccasionRoutes");
+const outfitRoutes = require("./routes/OutfitRoutes");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
@@ -21,6 +22,7 @@ app.use("/material", materialRoutes);
 app.use("/clothes", clothesRoutes);
 app.use("/modes", modeRoutes);
 app.use("/occasions", occasionRoutes);
+app.use("/outfits", outfitRoutes);
 
 // Start the server
 app.listen(port, () => {

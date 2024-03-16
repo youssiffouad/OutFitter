@@ -31,4 +31,9 @@ router.get(
   TVMW.verifyToken,
   userController.fetchAllClothes
 );
+router.get(
+  "/fetchAllOutfits",
+  TVMW.verifyToken,
+  userController.fetchAllOutfits
+);
 module.exports = router;

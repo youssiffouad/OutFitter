@@ -9,13 +9,12 @@ const OutfitClothes = sequelize.define(
   { timestamps: false }
 );
 
-Outfit.belongsToMany(Clothes, { through: OutfitClothes });
-Clothes.belongsToMany(Outfit, { through: OutfitClothes });
+Outfit.belongsToMany(Clothes, { through: OutfitClothes, onDelete: "CASCADE" });
+Clothes.belongsToMany(Outfit, { through: OutfitClothes, onDelete: "CASCADE" });
 
-sequelize
-  .sync()
+OutfitClothes.sync()
   .then(() => {
-    console.log("Database synchronized successfully.");
+    console.log("OutfitClothes synchronized successfully.");
   })
   .catch((error) => {
     console.error("Error synchronizing database:", error);

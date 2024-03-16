@@ -27,6 +27,7 @@ const deleteClothesItem = async (id) => {
     return path;
   } catch (err) {
     console.log("failed to delete clothes item", err);
+    throw err;
   }
 };
 

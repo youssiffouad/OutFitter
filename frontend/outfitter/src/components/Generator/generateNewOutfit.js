@@ -4,13 +4,13 @@ import usePopUp from "../../hooks/use_popup";
 import OutfitGeneratorForm from "./FormGenerateOutfit";
 import { createPortal } from "react-dom";
 import { useDispatch } from "react-redux";
-import { setdisplayAddPiecceForm } from "../../reduxStore/ClothesSlice";
+import { setdisplayAddOutfitForm } from "../../reduxStore/OutfitSlice";
 const GenerateNewOutfit = () => {
   const { FormContent, controlFormJSX } = usePopUp();
   const dispatch = useDispatch();
   const payloadform = <OutfitGeneratorForm />;
   const handleADD = () => {
-    dispatch(setdisplayAddPiecceForm(true));
+    dispatch(setdisplayAddOutfitForm(true));
     controlFormJSX(payloadform);
   };
 

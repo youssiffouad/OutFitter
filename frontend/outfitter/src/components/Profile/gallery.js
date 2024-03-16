@@ -11,7 +11,8 @@ const Gallery = () => {
   }, []);
   return (
     <div className={styles.gridContainer}>
-      {clothes.length > 0 &&
+      {clothes &&
+        clothes.length > 0 &&
         clothes.map((item) => (
           <ClothesPhotoCard
             key={item.id}

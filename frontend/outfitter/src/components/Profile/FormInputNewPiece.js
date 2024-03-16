@@ -6,12 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addNewClothesPiece,
   setSelectedClothesPiece,
-  setdispalyForm,
+  setdisplayAddPiecceForm,
 } from "../../reduxStore/ClothesSlice";
 import { fetchMaterials } from "../../reduxStore/materialSlice";
 import { fetchWeatherConditions } from "../../reduxStore/weatherSlice";
 import { useEffect } from "react";
-import usePopUp from "../../hooks/use_popup";
 
 // Define your validation schema using Yup
 const validationSchema = Yup.object({
@@ -247,7 +246,16 @@ const InputNewPieceForm = () => {
               </div>
 
               {/* Submit button */}
-              <button type="submit">Submit</button>
+              <div className="d-flex justify-content-around">
+                <button type="submit">Submit</button>
+                <button
+                  type="button"
+                  className="bg-danger"
+                  onClick={() => dispatch(setdisplayAddPiecceForm(false))}
+                >
+                  cancel
+                </button>
+              </div>
             </form>
           </div>
         </div>

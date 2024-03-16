@@ -1,28 +1,11 @@
-.gridContainer {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-}
-
-.Card {
-  height: 50vh;
-  display: flex;
-  justify-content: center;
-  position: relative;
-  background-color: darkgrey;
-  flex-direction: column;
-  margin: 5%;
-  padding: 3%;
-  border-radius: 5px;
-  box-shadow: 0 0 3px white;
-}
 .OutfitgridContainer {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
 }
 .OutfitCard {
-  height: 50vh;
+  height: 35vh;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   position: relative;
   background-color: darkgrey;
   flex-direction: row;
@@ -31,29 +14,29 @@
   border-radius: 5px;
   box-shadow: 0 0 3px white;
 }
-.ImgContainer {
-  height: 70%;
-  width: 90%;
+.OutfitImgContainer {
+  height: 80%;
+  width: 32%;
   position: relative;
   overflow: visible;
   box-shadow: 0 0 3px 0px #373737;
   border-radius: 5px;
 }
-.ImgContainer img {
+.OutfitImgContainer img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 5px;
   object-position: 50% 50%;
 }
-.ImgContainer img:hover {
+.OutfitImgContainer img:hover {
   cursor: pointer;
 }
 .favIcon {
   background-color: grey;
   position: absolute;
-  top: 6%;
-  right: -12%;
+  bottom: 18%;
+  right: 1%;
   padding: 5px 5px 2px 5px;
   border-radius: 6px;
   box-shadow: 0 0 10px black;
@@ -65,8 +48,8 @@
 .favIcon:hover::after {
   content: "Add to favorites";
   position: absolute;
-  top: 100%; /* Adjust the distance from the top */
-  left: 50%; /* Adjust the horizontal position */
+  bottom: 100%; /* Adjust the distance from the top */
+  left: 10%; /* Adjust the horizontal position */
   transform: translateX(-50%);
   background-color: rgba(0, 0, 0, 0.8); /* Background color of the tooltip */
   color: #fff; /* Text color of the tooltip */
@@ -75,27 +58,13 @@
   font-size: 12px; /* Adjust the font size */
 }
 
-.ImgAtts {
-  display: flex;
-  flex-direction: column;
-}
-.ImgAtts > p {
-  margin-bottom: 0 !important;
-}
-.ImgAtts > h6 {
-  height: 22px;
-}
-.ImgAtts > * {
-  overflow: hidden;
-}
-
 .trashContainer {
   position: absolute;
   background-color: grey;
   padding: 3px 5px 3px 5px;
   border-radius: 5px;
-  bottom: 12%;
-  right: 5%;
+  bottom: 1%;
+  right: 1%;
   box-shadow: 0 0 6px black;
   cursor: pointer;
   overflow: visible;
@@ -108,8 +77,8 @@
 .trashContainer:hover::after {
   content: "delete item";
   position: absolute;
-  top: 100%; /* Adjust the distance from the top */
-  left: 50%; /* Adjust the horizontal position */
+  bottom: 1%;
+  left: -117%;
   transform: translateX(-50%);
   background-color: rgba(0, 0, 0, 0.8); /* Background color of the tooltip */
   color: #fff; /* Text color of the tooltip */
