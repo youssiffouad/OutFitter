@@ -5,9 +5,10 @@ import backport from "../helpers/backendport";
 
 const initialState = {
   user: null,
-  loading: false,
-  error: null,
   token: null, // Add token field to store JWT token
+  popupMsg: "",
+  popupDisplay: false,
+  popupTouched: 0,
 };
 
 const userSlice = createSlice({
@@ -26,19 +27,31 @@ const userSlice = createSlice({
     setError(state, action) {
       state.error = action.payload;
     },
+    setPopupMsg(state, action) {
+      state.popupMsg = action.payload;
+    },
+    setPopupDisplay(state, action) {
+      state.popupDisplay = action.payload;
+    },
+    setPopupTouched(state, action) {
+      state.popupTouched = action.payload;
+    },
   },
 });
 
-export const { setUser, setToken, setLoading, setError } = userSlice.actions;
+export const {
+  setUser,
+  setToken,
+  setLoading,
+  setError,
+  setPopupMsg,
+  setPopupDisplay,
+  setPopupTouched,
+} = userSlice.actions;
 
 // Action creator for signup process
-
 export const signUp = (userData) => async (dispatch) => {
   try {
-    // Dispatch loading action
-    console.log("i am in dispatch");
-    //dispatch(setLoading(true));
-
     // Make API call to signup endpoint
     const response = await fetch(`http://localhost:${backport}/user/signup`, {
       method: "POST",
@@ -57,7 +70,7 @@ export const signUp = (userData) => async (dispatch) => {
     const data = await response.json();
     console.log("here is the response data", data);
     const users = await fetch(`http://localhost:${backport}/user/view`);
-    console.log("here are the users igot from back", await users.json());
+    console.log("here are the users i got from back", await users.json());
 
     // Dispatch success action with user data
     dispatch(setUser(data));
@@ -76,7 +89,7 @@ export const signUp = (userData) => async (dispatch) => {
 export const login = (credentials, navigate) => async (dispatch) => {
   try {
     // Dispatch loading action
-    dispatch(setLoading(true));
+    dispatch(setPopupDisplay(false));
     const loginPayload = {
       name: credentials.username,
       password: credentials.password,
@@ -112,10 +125,8 @@ export const login = (credentials, navigate) => async (dispatch) => {
   } catch (error) {
     // Dispatch error action
     console.log(error.message);
-
-    dispatch(setError(error.message));
-    // Dispatch loading complete action
-    dispatch(setLoading(false));
+    dispatch(setPopupDisplay(true));
+    dispatch(setPopupMsg(error.message));
   }
 };
 

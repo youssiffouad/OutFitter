@@ -1,5 +1,6 @@
 // userController.js
 const fs = require("fs");
+const passport = require("../middleware/passportConfig");
 const UserServices = require("../Services/userServices");
 const {
   handleSignInError,
@@ -178,6 +179,52 @@ const addNewClothesPiece = async (req, res) => {
       .json({ message: "internal server error failed to add new Piece", err });
   }
 };
+//controller to handle google auth
+const GoogleAuth = async (req, res) => {
+  console.log(
+    "i am in the controllerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr auth/google"
+  );
+  const redirectUrl = client.generateAuthUrl({
+    access_type: "offline",
+    scope: ["profile", "email"],
+    prompt: "select_account", // Force user to select account
+  });
+  res.redirect(redirectUrl);
+};
+
+//controller to handle gooogle auth CALLBACK
+const CallBackGoogleAuth = async (req, res) => {
+  const code = req.query.code;
+  console.log("here is the code", code);
+  try {
+    const { tokens } = await client.getToken(code);
+    console.log("heree are the tokeens", tokens);
+    client.setCredentials(tokens);
+    const { data } = await client.request({
+      url: "https://www.googleapis.com/oauth2/v3/userinfo",
+    });
+    console.log("here is hte data", data);
+    let user = await UserServices.findByGmail(data.email);
+    console.log("here is the user", user);
+    if (!user) {
+      // User doesn't exist, create a new user
+      console.log(
+        "userrrrrrrrrrrrrrrrrrrrrrrr doesnnnnnnnnnnnnnnnnnnnnnnnotttttttttttt exiiiistttttttt"
+      );
+      user = await UserServices.createUserFromGoogle({
+        name: data.name,
+        email: data.email,
+      });
+    }
+    const token = jwt.sign({ id: user.id, username: user.name }, "outfitter", {
+      expiresIn: "24h",
+    });
+    res.redirect(`http://localhost:3000/login?token=${token}`);
+  } catch (error) {
+    console.error("Error retrieving access token:", error.message);
+    res.status(500).send("Failed to retrieve access token");
+  }
+};
 
 module.exports = {
   signIn,
@@ -189,4 +236,6 @@ module.exports = {
   addNewClothesPiece,
   fetchAllClothes,
   fetchAllOutfits,
+  GoogleAuth,
+  CallBackGoogleAuth,
 };

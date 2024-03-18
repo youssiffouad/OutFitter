@@ -2,7 +2,7 @@ import styles from "../../styles/OutfitGallery.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
-import { addToFavourites } from "../../reduxStore/OutfitSlice";
+import { addToFavourites, deleteOutfit } from "../../reduxStore/OutfitSlice";
 const OutfitCard = (props) => {
   const dispatch = useDispatch();
   console.log(props.id);
@@ -29,7 +29,10 @@ const OutfitCard = (props) => {
         />
       </div>
       <div className={styles.trashContainer}>
-        <FontAwesomeIcon icon={faTrash} />
+        <FontAwesomeIcon
+          icon={faTrash}
+          onClick={() => dispatch(deleteOutfit(props.id))}
+        />
       </div>
     </div>
   );

@@ -39,7 +39,7 @@ const signIn = async (username, password) => {
     const token = jwt.sign(
       { id: userFromDB.id, username: userFromDB.name },
       secretKey,
-      { expiresIn: "2h" }
+      { expiresIn: "24h" }
     );
     console.log("i generated token ----->", token);
 
@@ -166,7 +166,32 @@ const addNewPiece = async (
     throw err;
   }
 };
-//getProfilePhoto(9);
+
+/*
+ *** fn to find user of certain ID (google ID)
+ */
+const findByGmail = async (gmail) => {
+  try {
+    // Find user by googleId
+    const user = await User.findOne({ where: { email: gmail } });
+    return user;
+  } catch (error) {
+    throw new Error("Error while finding user by Google ID");
+  }
+};
+
+/*
+ *** fn to create user given data from his google profile
+ */
+const createUserFromGoogle = async (profileData) => {
+  try {
+    // Create user in the database
+    const user = await User.create(profileData);
+    return user;
+  } catch (error) {
+    throw new Error("Error while creating user from Google profile");
+  }
+};
 
 module.exports = {
   signIn,
@@ -178,4 +203,6 @@ module.exports = {
   getAllClothes,
   getAllOutfits,
   addNewPiece,
+  findByGmail,
+  createUserFromGoogle,
 };

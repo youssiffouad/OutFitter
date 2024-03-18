@@ -12,7 +12,9 @@ const verifyToken = async (req, res, next) => {
     next();
   } catch (err) {
     console.log("error in token verification", err);
-    return res.status(403).json({ message: "Forbidden: Invalid token" });
+    return res
+      .status(403)
+      .json({ message: "Forbidden: Invalid or expired token" });
   }
 };
 module.exports = { verifyToken };

@@ -30,6 +30,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
   font-family: "Arial", sans-serif; /* Use a suitable font family */
   color: #ad9b9b;
+  overflow: hidden;
 
   input[type="color"] {
     vertical-align: middle;

@@ -5,7 +5,7 @@ const outfitServices = require("../Services/outfitServices");
 const fs = require("fs");
 const Outfit = require("../models/Outfit");
 /*
- ***  controller to generate new Outfit
+ ***  controller to generate new Outfit for certain user
  */
 const generateNewOutfit = async (req, res) => {
   try {

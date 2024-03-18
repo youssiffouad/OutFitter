@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,6 +8,7 @@ import { AuthContext } from "../../ContextStore/authenticationStore";
 import { useDispatch } from "react-redux";
 import { login } from "../../reduxStore/userSlice";
 import { useNavigate } from "react-router-dom";
+import backport from "../../helpers/backendport";
 
 // Define validation schema using Yup
 const validationSchema = Yup.object().shape({
@@ -20,6 +21,16 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const { toggleForm } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const tokenInURI = params.get("token");
+    if (tokenInURI) {
+      const token = decodeURIComponent(tokenInURI);
+      console.log("here is token in uri", token);
+      localStorage.setItem("token", token);
+      navigate("/home");
+    }
+  }, []);
   // Initialize Formik form using useFormik hook
   const formik = useFormik({
     initialValues: {
@@ -129,6 +140,14 @@ const LoginForm = () => {
             onClick={toggleForm}
           >
             join Us
+          </button>
+          <button
+            type="button"
+            onClick={async () => {
+              window.location.href = `http://localhost:${backport}/user/auth/google`;
+            }}
+          >
+            Use Gmail
           </button>
         </div>
       </form>

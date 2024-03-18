@@ -11,17 +11,18 @@ const OutfitGallery = () => {
   }, []);
   return (
     <div className={styles.OutfitgridContainer}>
-      {outfits.map((outfit) => (
-        <OutfitCard
-          key={outfit.id}
-          id={outfit.id}
-          favourite={outfit.favourite}
-          clothes={outfit.Clothes}
-          mode={outfit.Mode}
-          occasion={outfit.OccasionType}
-          weathercondition={outfit.WeatherCondition}
-        />
-      ))}
+      {outfits &&
+        outfits.map((outfit) => (
+          <OutfitCard
+            key={outfit.id}
+            id={outfit.id}
+            favourite={outfit.favourite}
+            clothes={outfit.Clothes}
+            mode={outfit.Mode}
+            occasion={outfit.OccasionType}
+            weathercondition={outfit.WeatherCondition}
+          />
+        ))}
     </div>
   );
 };

@@ -102,7 +102,7 @@ export const fetchAllOutfits = createAsyncThunk(
 );
 
 /*
- ***redux thunk to add certian clothes piece to favourites o remove it
+ ***redux thunk to add certian outfit to favourites o remove it
  */
 export const addToFavourites = createAsyncThunk(
   "outfits/addToFavourites",
@@ -141,6 +141,42 @@ export const addToFavourites = createAsyncThunk(
       console.log("here is the response msg after adding to fav", data);
     } catch (err) {
       console.log("failed to add to fav", err);
+    }
+  }
+);
+
+/*
+ *** redux Thunk to DELETE certain outfit
+ *** args----> the outfit ID
+ */
+export const deleteOutfit = createAsyncThunk(
+  "outfits/delete",
+  async (id, { _, dispatch, getState }) => {
+    try {
+      const token = localStorage.getItem("token");
+      let state = getState();
+      let outfits = state.outfit.outfits;
+      const payload = { id };
+      const response = await fetch(
+        `http://localhost:${backport}/outfits/delete`,
+        {
+          method: "DELETE",
+          headers: { authorization: token, "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
+      const data = await response.json();
+      let modifiedOutfits = outfits.filter((outfit) => {
+        if (outfit.id !== id) return outfit;
+      });
+      dispatch(setOutfits(modifiedOutfits));
+      dispatch(setenablePopup(true));
+      dispatch(setPopupText(data.message));
+      dispatch(setPopupDisplay(true));
+    } catch (err) {
+      dispatch(setPopupText(err.message));
+      dispatch(setPopupDisplay(true));
+      console.log("failed to delete item", err);
     }
   }
 );

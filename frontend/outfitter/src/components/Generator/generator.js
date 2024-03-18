@@ -22,7 +22,6 @@ const Generator = () => {
     }
   }, [
     popupMsgText,
-    Msgcomponent,
     controlDisplay,
     controlMsgContent,
     popupDisplay,

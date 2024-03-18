@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import styles from "../../../styles/navbar.module.css"; // Import the CSS module
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import logo from "../../../images/outfitLogo.png";
 
 const Navbar = () => {
   const [activeItem, setActiveItem] = useState(null);
-
+  const navigate = useNavigate();
   const handleItemClick = (itemName) => {
     setActiveItem(itemName);
   };
@@ -77,6 +77,15 @@ const Navbar = () => {
                 <Link to="/Myprofile">My profile</Link>
               </li>
             </ul>
+            <button
+              className="btn btn-secondary h-25"
+              onClick={() => {
+                navigate("/login");
+                localStorage.clear("token");
+              }}
+            >
+              logout
+            </button>
           </div>
         </div>
       </nav>
