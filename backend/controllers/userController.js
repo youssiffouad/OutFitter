@@ -1,6 +1,5 @@
 // userController.js
 const fs = require("fs");
-const passport = require("../middleware/passportConfig");
 const UserServices = require("../Services/userServices");
 const {
   handleSignInError,
@@ -8,6 +7,14 @@ const {
   handlePasswordChangeError,
 } = require("../errorHandling/userErrorHandling");
 const { ReplaceUrlwithData } = require("../middleware/replaceURlwithData");
+const { OAuth2Client } = require("google-auth-library");
+const jwt = require("jsonwebtoken");
+
+const CLIENT_ID =
+  "236650158232-4mt1r5mfsve5nh4fbjp79iqojvqi7nqf.apps.googleusercontent.com"; // Replace with your client ID
+const CLIENT_SECRET = "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";
+const REDIRECT_URI = "http://localhost:3060/user/auth/google/callback";
+const client = new OAuth2Client(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
 
 const signIn = async (req, res) => {
   try {
