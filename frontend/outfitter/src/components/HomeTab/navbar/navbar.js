@@ -41,7 +41,10 @@ const Navbar = () => {
                   transform: "translate(-50%, -50%)",
                   maxHeight: "122%",
                 }}
-                onClick={() => navigate("/home")}
+                onClick={() => {
+                  navigate("/home");
+                  handleItemClick("home");
+                }}
               />
             </div>
             <ul className={styles.nav}>
