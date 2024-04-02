@@ -77,6 +77,7 @@ const uploadPhoto = async (file, userId) => {
   }
   console.log("here is the selected user", user);
   const photoUrl = file.path;
+  console.log("here is the profile photo path at the userServices", file.path);
   user.profile_photo = photoUrl;
   await user.save();
 

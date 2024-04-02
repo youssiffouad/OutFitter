@@ -35,11 +35,13 @@ const Navbar = () => {
                 alt="logo"
                 style={{
                   position: "absolute",
+                  cursor: "pointer",
                   left: "50%",
                   top: "58%",
                   transform: "translate(-50%, -50%)",
                   maxHeight: "122%",
                 }}
+                onClick={() => navigate("/home")}
               />
             </div>
             <ul className={styles.nav}>

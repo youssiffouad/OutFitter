@@ -25,7 +25,7 @@ const MyProfile = () => {
   ]);
   return (
     <div
-      className="container-xl bg-dark "
+      className="container-fluid bg-dark "
       style={{ height: "calc(100vh - 60px) " }}
     >
       {createPortal(Msgcomponent(), document.getElementById("popupPortal"))}
