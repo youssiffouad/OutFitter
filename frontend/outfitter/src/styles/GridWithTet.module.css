@@ -1,0 +1,41 @@
+/* ImageWithText.module.css */
+.container {
+  display: flex;
+  align-items: center;
+  background-color: #00000014;
+  margin-bottom: 20px;
+  padding: 10px 0px 9px 10px;
+  margin-bottom: 40px;
+}
+
+.textContainer {
+  flex: 1 1;
+  text-align: center;
+}
+
+.description {
+  font-size: 1rem;
+  color: #666;
+}
+
+.photoGrid {
+  width: 64vw;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+.photoContainer {
+  overflow: hidden;
+  box-shadow: 0 0 4px 0px #000000;
+}
+.photo {
+  width: 100%; /* Ensure each photo takes the full width of its container */
+  height: 250px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.photo:hover {
+  transform: rotate(3deg) scale(1.1);
+
+  position: relative;
+}

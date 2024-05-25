@@ -1,0 +1,45 @@
+/* headerPhoto.module.css */
+.headerPhoto {
+  position: relative;
+  width: 100vw;
+  height: 77vh;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 70%; /* Adjust the width of the overlay as needed */
+  height: 100%;
+  background: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 0.9) 30%,
+    /* Adjust the gradient stops to control the spread */ transparent 100%
+  );
+}
+
+.headerPhoto h1 {
+  position: relative;
+  color: #fff;
+  top: 36%;
+  left: 73%;
+  text-transform: capitalize;
+
+  font-size: xxx-large;
+}
+
+.headerPhoto::before {
+  content: "";
+  display: block;
+  background-image: url("../images//cover1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-position: center;
+}
