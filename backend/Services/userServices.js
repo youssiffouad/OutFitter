@@ -168,8 +168,11 @@ const addNewPiece = async (
 
     // Determine the new file name based on the record ID
     const newFileName = newClothes.id + path.extname(file.originalname);
+    console.log("her eis new filename", newFileName);
+
     const oldPath = file.path;
     const newPath = path.join(path.dirname(oldPath), newFileName);
+    console.log("here is newpath", newPath);
 
     // Rename the file
     fs.renameSync(oldPath, newPath);

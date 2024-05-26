@@ -113,7 +113,7 @@ const fetchAllClothes = async (req, res) => {
     for (const cloth of clothesData) {
       const photoPath = path.join(
         __dirname,
-        "../assets/clothesPhoto",
+        "../react-outfit-model/src/static",
         cloth.photo
       ); //where the property photo is just the file name
       console.log("arrangement");
@@ -149,7 +149,7 @@ const fetchAllOutfits = async (req, res) => {
       for (let j = 0; j < outfits[i].Clothes.length; j++) {
         const photoPath = path.join(
           __dirname,
-          "../assets/clothesPhoto",
+          "../react-outfit-model/src/static",
           outfits[i].Clothes[j].photo
         ); //where the property photo is just the file name
         outfits[i].Clothes[j].photo = await ReplaceUrlwithData(photoPath);

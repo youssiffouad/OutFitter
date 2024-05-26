@@ -25,7 +25,7 @@ const generateNewOutfit = async (req, res) => {
     //   clothPhoto.photo = photoData;
     // }
     // Set the folder path
-    const folderPath = path.join(__dirname, "../assets/ClothesPhoto");
+    const folderPath = path.join(__dirname, "../react-outfit-model/src/static");
     /*
      *** sth should happen with the AI where the model will receive ( mode,weather,occasion,daytime and PhotosWithURLS with their IDS)
      *** NOW I MODIFIED THE CODE SO FILE NAME IS THE SAME AS THE PHOTO ID
@@ -37,7 +37,10 @@ const generateNewOutfit = async (req, res) => {
     // Function to call the Python script
     const getChosenIds = async (certianfolderPath) => {
       return new Promise((resolve, reject) => {
-        const scriptPath = path.join(__dirname, "../../selectPhotos.py");
+        const scriptPath = path.join(
+          __dirname,
+          "../react-outfit-model/src/main.py"
+        );
         execFile(
           "python",
           [scriptPath, certianfolderPath],
@@ -67,7 +70,7 @@ const generateNewOutfit = async (req, res) => {
     for (let i = 0; i < outfitGenerated.Clothes.length; i++) {
       const photoPath = path.join(
         __dirname,
-        "../assets/clothesPhoto",
+        "../react-outfit-model/src/static",
         outfitGenerated.Clothes[i].photo
       );
       outfitGenerated.Clothes[i].photo = await ReplaceUrlwithData(photoPath);
