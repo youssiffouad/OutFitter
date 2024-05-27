@@ -16,7 +16,7 @@ import { fetchOccasions } from "../../reduxStore/occasionSlice";
 const validationSchema = Yup.object({
   occasion: Yup.string().required("occasion is required"),
   dayornight: Yup.string().required("day Time is required"),
-  weatherCondition: Yup.string().required("weather condition is required"),
+  weatherCondition: Yup.string().required("season is required"),
   mode: Yup.string().required("Mode is required"),
 });
 

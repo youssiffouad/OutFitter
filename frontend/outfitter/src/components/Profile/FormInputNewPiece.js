@@ -15,9 +15,9 @@ import { useEffect } from "react";
 // Define your validation schema using Yup
 const validationSchema = Yup.object({
   image: Yup.mixed().required("Image is required"),
-  category: Yup.string().required("Category is required"),
-  weatherCondition: Yup.string().required("weatherCondition is required"),
-  material: Yup.string().required("material is required"),
+  category: Yup.string().required("day time is required"),
+  weatherCondition: Yup.string().required("season is required"),
+  material: Yup.string().required("occasion is required"),
   description: Yup.string().required("Description is required"),
 });
 
@@ -119,9 +119,10 @@ const InputNewPieceForm = () => {
                       : ""
                   }`}
                 >
-                  <option value="">Select a category</option>
-                  <option value="category1">Category 1</option>
-                  <option value="category2">Category 2</option>
+                  <option value="">Select day time</option>
+                  <option value="category1">morning </option>
+                  <option value="category2">evening </option>
+                  <option value="category2">night </option>
                   {/* Add more options as needed */}
                 </select>
                 <label
@@ -132,7 +133,7 @@ const InputNewPieceForm = () => {
                       : ""
                   }`}
                 >
-                  Category
+                  day time
                 </label>
                 {formik.touched.category && formik.errors.category && (
                   <div className="text-danger">{formik.errors.category}</div>
@@ -153,7 +154,7 @@ const InputNewPieceForm = () => {
                       : ""
                   }`}
                 >
-                  <option value="">select a material</option>
+                  <option value="">select a occasion</option>
                   {materials.map((mat) => (
                     <option key={mat.id} value={mat.id}>
                       {mat.name}
@@ -168,7 +169,7 @@ const InputNewPieceForm = () => {
                       : ""
                   }`}
                 >
-                  Material
+                  occasion
                 </label>
                 {formik.touched.material && formik.errors.material && (
                   <div className="text-danger">{formik.errors.material}</div>
@@ -190,7 +191,7 @@ const InputNewPieceForm = () => {
                       : ""
                   }`}
                 >
-                  <option value="">Select a weather condition</option>
+                  <option value="">Select a season</option>
                   {weatherConditions.map((cond) => (
                     <option value={cond.id} key={cond.id}>
                       {cond.name}
@@ -206,7 +207,7 @@ const InputNewPieceForm = () => {
                       : ""
                   }`}
                 >
-                  Weather Condition
+                  season
                 </label>
                 {formik.touched.weatherCondition &&
                   formik.errors.weatherCondition && (
