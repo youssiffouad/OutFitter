@@ -9,6 +9,7 @@ import {
   setdisplayAddPiecceForm,
 } from "../../reduxStore/ClothesSlice";
 import { fetchMaterials } from "../../reduxStore/materialSlice";
+import { fetchModes } from "../../reduxStore/modeSlice";
 import { fetchWeatherConditions } from "../../reduxStore/weatherSlice";
 import { useEffect } from "react";
 
@@ -24,6 +25,7 @@ const validationSchema = Yup.object({
 const InputNewPieceForm = () => {
   const dispatch = useDispatch();
   const weatherConditions = useSelector((state) => state.weather);
+  const modes = useSelector((state) => state.mode);
 
   const selectedClothesPiece = useSelector(
     (state) => state.clothes.selectedClothesPiece
@@ -55,6 +57,7 @@ const InputNewPieceForm = () => {
   useEffect(() => {
     dispatch(fetchMaterials());
     dispatch(fetchWeatherConditions());
+    dispatch(fetchModes());
   }, []);
 
   return (
@@ -217,35 +220,42 @@ const InputNewPieceForm = () => {
                   )}
               </div>
 
-              {/* Description field */}
+              {/* mode field */}
               <div>
-                <textarea
-                  id="description"
-                  name="description"
+                <select
+                  id="mode"
+                  name="mode"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  value={formik.values.description}
+                  value={formik.values.mode}
                   className={`${
-                    formik.touched.description && formik.errors.description
+                    formik.touched.mode && formik.errors.mode
                       ? "border-danger"
                       : ""
                   }`}
-                />
+                >
+                  <option value="">Select mood</option>
+                  {modes.map((mode) => (
+                    <option key={mode.id} value={mode.id}>
+                      {mode.name}
+                    </option>
+                  ))}
+                  {/* Add more options as needed */}
+                </select>
                 <label
-                  htmlFor="description "
+                  htmlFor="mode"
                   className={`${
-                    formik.touched.description && formik.errors.description
+                    formik.touched.mode && formik.errors.mode
                       ? "text-danger"
                       : ""
                   }`}
                 >
-                  Description
+                  mood
                 </label>
-                {formik.touched.description && formik.errors.description && (
-                  <div className="text-danger">{formik.errors.description}</div>
+                {formik.touched.mode && formik.errors.mode && (
+                  <div className="text-danger">{formik.errors.mode}</div>
                 )}
               </div>
-
               {/* Submit button */}
               <div className="d-flex justify-content-around">
                 <button type="submit">Submit</button>
