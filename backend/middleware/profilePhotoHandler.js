@@ -6,7 +6,11 @@ const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     const { phototype } = req.headers;
     console.log("(2)-here is the phototype received at server", phototype);
-    const profilePhotosDir = path.join("assets", phototype); // Using path.join to create a relative path
+    const profilePhotosDir = path.join(
+      __dirname,
+      "../react-outfit-model/src/static"
+    );
+
     if (!fs.existsSync(profilePhotosDir)) {
       fs.mkdirSync(profilePhotosDir, { recursive: true });
     }

@@ -32,6 +32,7 @@ export const addNewClothesPiece = createAsyncThunk(
   async (formdata, { dispatch }) => {
     try {
       const token = localStorage.getItem("token");
+      console.log("jfndkjfnkldsl");
       const response = await fetch(
         `http://localhost:${backport}/user/addNewClothesPiece`,
         {

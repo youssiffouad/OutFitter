@@ -23,7 +23,11 @@ const deleteClothesItem = async (id) => {
   try {
     const clothesItem = await Clothes.findByPk(id);
     const filename = await clothesItem.get("photo");
-    const filepath = path.join(__dirname, "../assets/ClothesPhoto", filename);
+    const filepath = path.join(
+      __dirname,
+      "../react-outfit-model/src/static",
+      filename
+    );
     console.log("here is the path i got ", path);
     await clothesItem.destroy();
     return filepath;

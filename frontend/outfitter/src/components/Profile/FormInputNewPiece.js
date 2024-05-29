@@ -1,25 +1,37 @@
 import styles from "../../styles/InputNewPieceStyle.module.css";
+
 import { useFormik } from "formik";
+
 import * as Yup from "yup";
+
 import ProtectedRoute from "../../helpers/HOCProtectionRoute";
+
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   addNewClothesPiece,
   setSelectedClothesPiece,
   setdisplayAddPiecceForm,
 } from "../../reduxStore/ClothesSlice";
+
 import { fetchMaterials } from "../../reduxStore/materialSlice";
+
 import { fetchModes } from "../../reduxStore/modeSlice";
+
 import { fetchWeatherConditions } from "../../reduxStore/weatherSlice";
+
 import { useEffect } from "react";
 
 // Define your validation schema using Yup
+
 const validationSchema = Yup.object({
   image: Yup.mixed().required("Image is required"),
+  mode: Yup.string().required("mood is required"),
   category: Yup.string().required("day time is required"),
+
   weatherCondition: Yup.string().required("season is required"),
+
   material: Yup.string().required("occasion is required"),
-  description: Yup.string().required("Description is required"),
 });
 
 const InputNewPieceForm = () => {
@@ -37,8 +49,8 @@ const InputNewPieceForm = () => {
     initialValues: {
       weatherCondition: "",
       material: "",
-      description: "",
       category: "",
+      mode: "",
       image: null,
     },
     validationSchema: validationSchema,
@@ -46,7 +58,7 @@ const InputNewPieceForm = () => {
       const formdata = new FormData();
       formdata.append("clothesimg", formik.values.image);
       formdata.append("category", formik.values.category);
-      formdata.append("description", formik.values.description);
+      formdata.append("mode", formik.values.mode);
       formdata.append("material", formik.values.material);
       formdata.append("weatherCondition", formik.values.weatherCondition);
       dispatch(addNewClothesPiece(formdata));
@@ -123,8 +135,11 @@ const InputNewPieceForm = () => {
                   }`}
                 >
                   <option value="">Select day time</option>
+
                   <option value="category1">morning </option>
+
                   <option value="category2">evening </option>
+
                   <option value="category2">night </option>
                   {/* Add more options as needed */}
                 </select>
@@ -219,8 +234,8 @@ const InputNewPieceForm = () => {
                     </div>
                   )}
               </div>
-
               {/* mode field */}
+
               <div>
                 <select
                   id="mode"
@@ -235,13 +250,16 @@ const InputNewPieceForm = () => {
                   }`}
                 >
                   <option value="">Select mood</option>
+
                   {modes.map((mode) => (
                     <option key={mode.id} value={mode.id}>
                       {mode.name}
                     </option>
                   ))}
+
                   {/* Add more options as needed */}
                 </select>
+
                 <label
                   htmlFor="mode"
                   className={`${
@@ -252,10 +270,12 @@ const InputNewPieceForm = () => {
                 >
                   mood
                 </label>
+
                 {formik.touched.mode && formik.errors.mode && (
                   <div className="text-danger">{formik.errors.mode}</div>
                 )}
               </div>
+
               {/* Submit button */}
               <div className="d-flex justify-content-around">
                 <button type="submit">Submit</button>

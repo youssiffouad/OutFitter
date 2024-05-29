@@ -107,7 +107,6 @@ const fetchAllClothes = async (req, res) => {
   try {
     const id = req.user.id;
     const clothesData = await UserServices.getAllClothes(id);
-    console.log("here are the clothes data", clothesData);
 
     // Iterate through clothesData and replace photo URL with photo itself
     for (const cloth of clothesData) {
@@ -116,9 +115,7 @@ const fetchAllClothes = async (req, res) => {
         "../react-outfit-model/src/static",
         cloth.photo
       ); //where the property photo is just the file name
-      console.log("arrangement");
-      console.log(__dirname);
-      console.log(cloth.photo);
+
       const photoData = fs.readFileSync(photoPath);
       const photoBase64 = Buffer.from(photoData).toString("base64");
       // Replace the photo path with base64 encoded photo data
