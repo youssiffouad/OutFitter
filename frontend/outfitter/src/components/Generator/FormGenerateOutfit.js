@@ -186,7 +186,7 @@ const OutfitGeneratorForm = () => {
                       : ""
                   }`}
                 >
-                  <option value="">Select mode</option>
+                  <option value="">Select mood</option>
                   {modes.map((mode) => (
                     <option key={mode.id} value={mode.id}>
                       {mode.name}
@@ -202,7 +202,7 @@ const OutfitGeneratorForm = () => {
                       : ""
                   }`}
                 >
-                  mode
+                  mood
                 </label>
                 {formik.touched.mode && formik.errors.mode && (
                   <div className="text-danger">{formik.errors.mode}</div>
